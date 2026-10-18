@@ -1,0 +1,52 @@
+m = [1, 2, '1', "12", [1, "2"]]
+
+a = 1
+a += 1
+a -= 2
+a *= 3
+a //= 4
+print(a)
+
+
+def f():
+    print(1)
+
+
+f()
+
+
+n = int(input("n = : "))
+k = 3
+__ = [1, 0.1, 'a', "abc", [1, 0.1, 'a', "abc"]]
+print(__)
+
+k = len(m)
+
+for i in range(6):
+    print(i)
+    if n % 2 == 0:
+        print("ch" + "")
+    else:
+        print('nch' + '')
+    n += k
+
+
+print(n)
+
+"""
+"""
+
+'''
+      '''
+
+# , . / // ' " [ ] < <= > >= = == != % * ** + - += -= *= /= //= ( ) # ''' """
+
+s = input("Массив: ")
+mas = s.split()
+mas = list(map(int, mas))
+mas2 = list(reversed(mas))
+print(sorted(mas), mas2)
+mas.reverse()
+print(mas)
+mas.sort()
+print(mas)

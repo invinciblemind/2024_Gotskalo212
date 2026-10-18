@@ -1,0 +1,108 @@
+Базовые элементы
+<program> ::= <statement> | <program> (<statement> | <comment>)*
+
+<statement> ::= <simple_statement> NEWLINE 
+              | <compound_statement>
+              | <function_definition>
+
+<simple_statement> ::= <assignment>
+                     | <expression>
+                     | <return_statement>
+                     | <break_statement>
+                     | <continue_statement>
+
+<compound_statement> ::= <if_statement>
+                       | <for_statement>
+                       | <while_statement>
+
+Выражения и присваивание
+<expression> ::= <logical_or_expression>
+
+<logical_or_expression> ::= <logical_and_expression> ("or" <logical_and_expression>)*
+
+<logical_and_expression> ::= <logical_not_expression> ("and" <logical_not_expression>)*
+
+<logical_not_expression> ::= "not" <logical_not_expression> | <comparison>
+
+<comparison> ::= < arith_expr > (COMP_OP < arith_expr >)*
+               | < arith_expr > COMP_OP < arith_expr > COMP_OP < arith_expr > 
+(* для цепочек сравнений *)
+
+<arith_expr> ::= <term> (("+" | "-") <term>)*
+
+<term> ::= <factor> (("*" | "/" | "//" | "%") <factor>)*
+
+<factor> ::= ["+" | "-" ] <power>
+
+<power> ::= <primary> ("**" <factor>)*
+
+<primary> ::= <function_call>
+            | <literal>
+            | <variable>
+            | "(" <expression> ")"
+
+
+COMP_OP ::= "==" | "!=" | "<" | ">" | "<=" | ">="
+
+<assignment> ::= <variable> "=" <expression>
+               | <variable> "+=" <expression>
+               | <variable> "-=" <expression>
+               | <variable> "*=" <expression>
+	  | <variable> "\=" <expression>
+Управляющие конструкции
+<if_statement> ::= "if" <expression> ":" <block>
+                 ( "elif" <expression> ":" <block> )*
+                 [ "else" ":" <block> ]
+
+<for_statement> ::= "for" <variable> "in range(" a1[,a2[,a3]] "):" <block>
+                  | "for" <variable> "in"  "):" <variable>  <block>
+a1 ::= <variable> | INT
+a2 ::= <variable> | INT
+a3 ::= <variable> | INT
+
+
+<while_statement> ::= "while" <expression> ":" <block>
+Функции
+<function_definition> ::= "def" <identifier> "(" [<parameters>] ")" ":" <block>
+<parameters> ::= <parameter> ( "," <parameter> )*
+<parameter> ::= <identifier> ["=" <expression>]
+<function_call> ::= <identifier> "(" [<parameters >] ")"
+
+Блоки и отступы
+<block> ::= NEWLINE INDENT <statements> DEDENT
+# Indent/Dedent – это начало отступа и конец отступа
+<statements> ::= <statement> | <statement> <statements>
+Литералы и переменные
+<literal> ::= <number> | <string> | <string_methods> |  <list> | <list_methods> |  <bool>   
+
+<number> ::= INT | REAL
+INT ::= [0-9]+ | "0b"[01]+ | "0o"[0-7]+ | "0x"[0-9a-fA-F]+
+REAL ::= [0-9]+ "." [0-9]* 
+
+<string> ::= "'" [^']* "'"   |    '"' [^"]* '"' #то что внутри квадратных скобок означает за исключением …
+
+<string_methods> ::= "len( "<variable> ")"             # Длина строки
+                   | <variable> ".split(" <string> ")"       # Разделение по символу
+                   | <variable> ".count(" <string> ")"    # Подсчёт вхождений
+                   | <variable> ".find(" <string> ")"       # Поиск первого вхождения
+
+<list> ::= "[" [ <expression> ( "," <expression> )* [ "," ] ] "]"
+<list_methods> ::= "len("<variable>")"                                                 # Длина списка
+                 | <variable> ".append(" <expression> ")"                            # Добавление в конец
+                 | <variable>  ".insert(" <expression> "," <expression> ")"  # Вставка
+                 | <variable> ".pop(" [ <expression> ] ")"                              # Удаление по индекцу
+                 | <variable> ".sort()"                                                               # Сортировка
+                 | <variable>  ".reverse()"                                                        # Разворот
+
+
+<bool> ::= "True" | "False"
+
+<comment> ::= "#" [^\n]*       # Однострочный комментарий
+            | "'''" .*? "'''"                  # Многострочные
+            | '"""' .*? '"""
+
+<variable> ::= IDENTIFIER
+<identifier> ::= IDENTIFIER
+IDENTIFIER ::= [a-zA-Z_][a-zA-Z0-9_]*
+
+
